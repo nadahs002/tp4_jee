@@ -1,9 +1,28 @@
 package metier.entities;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "PRODUITS")
 public class Produit implements Serializable{
+@Id
+@Column (name="ID_PRODUIT")
+@GeneratedValue (strategy=GenerationType.IDENTITY)
 private Long idProduit;
+@Column (name="NOM_PRODUIT")
 private String nomProduit;
 private double prix;
+private Categorie categorie;
+public Produit(String nomProduit, double prix,Categorie cat) {
+super();
+this.nomProduit = nomProduit;
+this.prix = prix;
+this.setCategorie(cat);
+}
 public Produit() {
 super();
 }
@@ -32,7 +51,14 @@ this.prix = prix;
 }
 @Override
 public String toString() {
-return "Produit [idProduit=" + idProduit + ", nomProduit=" + 
+return "Produit [idProduit=" + idProduit + ", nomProduit=" +
 nomProduit + ", prix=" + prix + "]";
+}
+
+public Categorie getCategorie() {
+return categorie;
+}
+public void setCategorie(Categorie categorie) {
+this.categorie = categorie;
 }
 }
